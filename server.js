@@ -18,7 +18,7 @@ app.get('/acquisitions', (req, res) => {
 });
 
 // Utilisation de process.env.PORT pour Glitch
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 1000;
 app.listen(PORT, () => {
   console.log(`Serveur démarré sur le port ${PORT}`);
 });
