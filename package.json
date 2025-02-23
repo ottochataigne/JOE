@@ -8,9 +8,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "newsapi": "^1.1.3"  // Ajoute cette ligne ici
-  },
-  "engines": {
-    "node": "14.x"
+    "newsapi-client": "^1.0.0",
+    "node-cron": "^3.0.0"
   }
 }
