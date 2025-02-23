@@ -23,9 +23,19 @@ app.get('/send-notification', (req, res) => {
       res.status(500).send(`Erreur lors de l'envoi du message : ${error.message}`);
     });
 });
+// Essayer d'écouter sur un autre port en cas de conflit
+const PORT = process.env.PORT || 3001;
 
-// Utiliser simplement process.env.PORT pour que Glitch attribue le port
-const PORT = process.env.PORT || 3000;  
 app.listen(PORT, () => {
   console.log(`Serveur démarré sur le port ${PORT}`);
+}).on('error', (err) => {
+  console.error('Erreur:', err);
+  if (err.code === 'EADDRINUSE') {
+    console.log(`Le port ${PORT} est déjà utilisé. Essayer un autre port...`);
+    setTimeout(() => {
+      app.listen(3002, () => {
+        console.log('Serveur redémarré sur le port 3002');
+      });
+    }, 1000);
+  }
 });
