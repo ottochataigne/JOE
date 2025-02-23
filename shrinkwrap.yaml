@@ -1,6 +1,7 @@
 dependencies:
   express: 4.21.2
-  newsapi: 2.4.1
+  node-cron: 2.0.3
+  node-fetch: 2.7.0
   twilio: 3.84.1
 packages:
   /accepts/1.3.8:
@@ -106,11 +107,6 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-6DnInpx7SJ2AK3+CTUE/ZM0vWTUboZCegxhC2xiIydHR9jNuTAASBrfEpHhiGOZw/nX51bHt6YQl8jsGo4y/0w==
-  /core-js/3.40.0:
-    dev: false
-    requiresBuild: true
-    resolution:
-      integrity: sha512-7vsMc/Lty6AGnn7uFpYT56QesI5D2Y/UkgKounk87OP9Z2H9Z8kj6jzcSGAxFmUtDOS0ntK6lbQz+Nsa0Jj6mQ==
   /dayjs/1.11.13:
     dev: false
     resolution:
@@ -485,13 +481,16 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg==
-  /newsapi/2.4.1:
+  /node-cron/2.0.3:
     dependencies:
-      core-js: 3.40.0
-      node-fetch: 2.7.0
+      opencollective-postinstall: 2.0.3
+      tz-offset: 0.0.1
     dev: false
+    engines:
+      node: '>=6.0.0'
+    requiresBuild: true
     resolution:
-      integrity: sha512-yw/aZBgDwNbNMqQ1V7XFKdW2jvL8Fh4qMiU0Awin87Rt6lbPnS8OuiLaL15Ws5X82/EXhzNf/djAlPHOWVgMJg==
+      integrity: sha512-eJI+QitXlwcgiZwNNSRbqsjeZMp5shyajMR81RZCqeW0ZDEj4zU9tpd4nTh/1JsBiKbF8d08FCewiipDmVIYjg==
   /node-fetch/2.7.0:
     dependencies:
       whatwg-url: 5.0.0
@@ -516,6 +515,11 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==
+  /opencollective-postinstall/2.0.3:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
   /parseurl/1.3.3:
     dev: false
     engines:
@@ -735,6 +739,10 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==
+  /tz-offset/0.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-kMBmblijHJXyOpKzgDhKx9INYU4u4E1RPMB0HqmKSgWG8vEcf3exEfLh4FFfzd3xdQOw9EuIy/cP0akY6rHopQ==
   /unpipe/1.0.0:
     dev: false
     engines:
@@ -785,6 +793,7 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
-  express: ^4.18.1
-  newsapi: ^2.0.3
-  twilio: ^3.72.0
+  express: ^4.17.1
+  node-cron: ^2.0.3
+  node-fetch: ^2.6.1
+  twilio: ^3.69.0
