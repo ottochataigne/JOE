@@ -1,26 +1,24 @@
 const express = require('express');
+const NewsAPI = require('newsapi');
+const newsapi = new NewsAPI('TA_CLÉ_API');  // Remplace par ta clé API NewsAPI
 const app = express();
 
-// Route principale
-app.get('/', (req, res) => {
-  res.send('Bienvenue sur ton agent de nouvelles financières!');
+app.get('/acquisitions', (req, res) => {
+  // Utilisation de NewsAPI sans axios
+  newsapi.v2.everything({
+    q: 'acquisition OR contrat', // Recherche d'articles sur l'acquisition ou le contrat
+    language: 'fr',               // Recherche en français
+  })
+  .then(response => {
+    res.json(response.articles);  // Renvoyer les articles trouvés
+  })
+  .catch(error => {
+    res.status(500).send('Erreur lors de la récupération des nouvelles');
+  });
 });
 
-// Serveur écoutant sur le port 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Le serveur est en fonctionnement sur le port ${PORT}`);
+  console.log(`Serveur démarré sur le port ${PORT}`);
 });
-const axios = require('axios');
 
-// Route pour récupérer les nouvelles
-app.get('/news', async (req, res) => {
-  try {
-    const response = await axios.get('https://newsapi.org/v2/everything?q=acquisition&apiKey=YOUR_API_KEY');
-    const articles = response.data.articles;
-    res.json(articles); // Retourne les articles en format JSON
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Erreur lors de la récupération des nouvelles.');
-  }
-});

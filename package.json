@@ -8,9 +8,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "newsapi-client": "^1.0.0",
+    "newsapi": "^1.0.0",
     "node-cron": "^3.0.0"
   }
 }
-
-
