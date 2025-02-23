@@ -13,7 +13,7 @@ const client = new Twilio(accountSid, authToken);
 
 // Fonction pour récupérer les nouvelles
 async function getNews() {
-  const apiKey = 'ton_API_KEY';  // Remplace par ta clé API News
+  const apiKey = 'c3756f69184c414abfe988f21e1580ea';  // Remplace par ta clé API News
   const url = `https://newsapi.org/v2/everything?q=acquisition%20contract&apiKey=${apiKey}`;
 
   try {
@@ -73,19 +73,24 @@ app.get('/send-notification', (req, res) => {
     });
 });
 
-// Essayer d'écouter sur un autre port en cas de conflit
+// Définir le port dynamiquement
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Serveur démarré sur le port ${PORT}`);
-}).on('error', (err) => {
-  console.error('Erreur:', err);
-  if (err.code === 'EADDRINUSE') {
-    console.log(`Le port ${PORT} est déjà utilisé. Essayer un autre port...`);
-    setTimeout(() => {
-      app.listen(3003, () => {
-        console.log('Serveur redémarré sur le port 3003');
-      });
-    }, 1000);
-  }
-});
+function startServer(port) {
+  app.listen(port, () => {
+    console.log(`Serveur démarré sur le port ${port}`);
+  }).on('error', (err) => {
+    console.error('Erreur:', err);
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Le port ${port} est déjà utilisé. Essayer un autre port...`);
+      // Essayer un autre port dynamique
+      const newPort = port + 1; // Choisir un port supérieur, ou tu peux rajouter une logique ici pour choisir un autre port.
+      setTimeout(() => {
+        startServer(newPort);
+      }, 1000);
+    }
+  });
+}
+
+// Lancer le serveur sur le port initial
+startServer(PORT);
