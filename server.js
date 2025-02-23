@@ -24,7 +24,8 @@ app.get('/send-notification', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
+// Utiliser simplement process.env.PORT pour que Glitch attribue le port
+const PORT = process.env.PORT || 3000;  
 app.listen(PORT, () => {
   console.log(`Serveur démarré sur le port ${PORT}`);
 });
