@@ -74,7 +74,7 @@ app.get('/send-notification', (req, res) => {
 });
 
 // Essayer d'écouter sur un autre port en cas de conflit
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Serveur démarré sur le port ${PORT}`);
