@@ -1,5 +1,7 @@
 const express = require('express');
 const Twilio = require('twilio');
+const fetch = require('node-fetch');
+const cron = require('node-cron');
 
 const app = express();
 
@@ -8,22 +10,6 @@ const accountSid = 'AC5afe0cb4a5249684e633514aa2d7b526';  // Assure-toi que l'Ac
 const authToken = 'b654dc1b76b103e40d0d2a125d326467';
 
 const client = new Twilio(accountSid, authToken);
-
-app.get('/send-notification', (req, res) => {
-  client.messages
-    .create({
-      body: 'Voici ta notification de test',
-      from: '+13308827147',  // Numéro Twilio acheté
-      to: '+33601172634',  // Ton numéro WhatsApp
-    })
-    .then(message => {
-      res.send(`Message envoyé avec succès : ${message.sid}`);
-    })
-    .catch(error => {
-      res.status(500).send(`Erreur lors de l'envoi du message : ${error.message}`);
-    });
-  
-const fetch = require('node-fetch');
 
 // Fonction pour récupérer les nouvelles
 async function getNews() {
@@ -44,7 +30,6 @@ async function getNews() {
     return [];
   }
 }
-const cron = require('node-cron');
 
 // Planifier une tâche toutes les heures
 cron.schedule('0 * * * *', async () => {
@@ -72,13 +57,21 @@ cron.schedule('0 * * * *', async () => {
   }
 });
 
-
-
-
-
-
-
-
+// Route pour envoyer une notification de test
+app.get('/send-notification', (req, res) => {
+  client.messages
+    .create({
+      body: 'Voici ta notification de test',
+      from: '+13308827147',  // Numéro Twilio acheté
+      to: '+33601172634',  // Ton numéro WhatsApp
+    })
+    .then(message => {
+      res.send(`Message envoyé avec succès : ${message.sid}`);
+    })
+    .catch(error => {
+      res.status(500).send(`Erreur lors de l'envoi du message : ${error.message}`);
+    });
+});
 
 // Essayer d'écouter sur un autre port en cas de conflit
 const PORT = process.env.PORT || 3001;
