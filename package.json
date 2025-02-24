@@ -14,5 +14,8 @@
     "twilio": "^3.69.0",
     "node-fetch": "^2.6.1",
     "node-cron": "^2.0.3"
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
