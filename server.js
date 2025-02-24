@@ -122,21 +122,8 @@ app.get('/send-notification', (req, res) => {
 // Définir le port dynamiquement
 const PORT = process.env.PORT || 3000;
 
-function startServer(port) {
-  app.listen(port, () => {
-    console.log(`Serveur démarré sur le port ${port}`);
-  }).on('error', (err) => {
-    console.error('Erreur:', err);
-    if (err.code === 'EADDRINUSE') {
-      console.log(`Le port ${port} est déjà utilisé. Essayer un autre port...`);
-      // Essayer un autre port dynamique
-      const newPort = port + 1; // Choisir un port supérieur, ou tu peux rajouter une logique ici pour choisir un autre port.
-      setTimeout(() => {
-        startServer(newPort);
-      }, 1000);
-    }
-  });
-}
+// Lancer le serveur sur le port dynamique
+app.listen(PORT, () => {
+  console.log(`Serveur démarré sur le port ${PORT}`);
+});
 
-// Lancer le serveur sur le port initial
-startServer(PORT);
