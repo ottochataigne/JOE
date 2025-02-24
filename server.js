@@ -16,7 +16,7 @@ async function getNews() {
   const apiKey = 'c3756f69184c414abfe988f21e1580ea';  // Remplace par ta clé API News
   
   // Requête API avec des mots-clés spécifiques
-  const query = 'acquisition AND (deal OR takeover) AND ("stock market" OR "public company" OR "listed")';
+  const query = '(New venture OR "Contrat à long terme" OR "Deal signé" OR "Entreprise acquise" OR "Merger agreement" OR Acquisition OR "Acheté par" OR "Nouveau méga-contrat" OR "New mega-contract" OR "Levée de fonds record" OR "Strategic acquisition" OR "Major contract" OR "Long-term supply contract" OR "Record fundraising") AND ("stock market" OR "listed" OR "public company" OR "NASDAQ" OR "NYSE" OR "bourse")';
   const url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&apiKey=${apiKey}`;
 
   try {
