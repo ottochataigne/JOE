@@ -45,17 +45,21 @@ function extractCompanyName(title) {
   return 'Entreprise inconnue';
 }
 
-// Fonction pour vérifier si une entreprise est cotée en bourse
+// Fonction pour vérifier si une entreprise est cotée en bourse via Alpha Vantage
 async function isCompanyListed(companyName) {
-  const apiKey = 'ta_clé_api_externe';  // Remplacer par la clé API d'une source externe
-  const url = `https://api.externe.com/company?name=${encodeURIComponent(companyName)}&apiKey=${apiKey}`;
+  const apiKey = 'L6KAZT0R76QGAK5Q';  // Remplace par ta clé API Alpha Vantage
+  const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${companyName}&apikey=${apiKey}`;
 
   try {
     const response = await fetch(url);
     const data = await response.json();
 
-    // Vérifie si la société est cotée
-    return data.isListed;
+    // Vérifie si la société est cotée en bourse
+    if (data['Global Quote'] && data['Global Quote']['01. symbol']) {
+      return true;  // La société est cotée en bourse
+    } else {
+      return false;  // La société n'est pas cotée
+    }
   } catch (error) {
     console.error('Erreur lors de la vérification de la société cotée en bourse :', error);
     return false;
@@ -76,6 +80,7 @@ cron.schedule('0 * * * *', async () => {
     // Vérifier si l'entreprise est cotée en bourse
     const isListed = await isCompanyListed(companyName);
 
+    // Si l'entreprise est cotée en bourse, on envoie la notification
     if (isListed) {
       // Envoie de la notification via Twilio
       client.messages
